@@ -1,75 +1,138 @@
-const express=require("express");
-const session=require("express-session");
-const Database=require("better-sqlite3");
-const bcrypt=require("bcryptjs");
-const path=require("path");
-const app=express();
-const db=new Database("didno.db");
-app.use(express.json());
-app.use(express.urlencoded({extended:true}));
-app.use(session({secret:process.env.SESSION_SECRET||"change-this-secret",resave:false,saveUninitialized:false,cookie:{httpOnly:true,maxAge:86400000}}));
+
+const express = require("express");
+const cookieParser = require("cookie-parser");
+const fs = require("fs");
+const path = require("path");
+const crypto = require("crypto");
+
+const app = express();
+const PORT = process.env.PORT || 3000;
+const DATA = path.join(__dirname, "data.json");
+const ADMIN_EMAIL = process.env.ADMIN_EMAIL || "admin@didno.ir";
+const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD || "Admin12345!";
+const SECRET = process.env.AUTH_SECRET || "didno-change-this-secret-in-render";
+
+app.use(express.json({limit:"2mb"}));
+app.use(cookieParser());
 app.use(express.static(path.join(__dirname,"public")));
 
-db.exec(`
-CREATE TABLE IF NOT EXISTS users(id INTEGER PRIMARY KEY AUTOINCREMENT,name TEXT NOT NULL,email TEXT UNIQUE NOT NULL,password TEXT NOT NULL,role TEXT NOT NULL DEFAULT 'user',created_at TEXT DEFAULT CURRENT_TIMESTAMP);
-CREATE TABLE IF NOT EXISTS services(id INTEGER PRIMARY KEY AUTOINCREMENT,title TEXT NOT NULL,description TEXT NOT NULL,price TEXT NOT NULL,icon TEXT NOT NULL);
-CREATE TABLE IF NOT EXISTS orders(id INTEGER PRIMARY KEY AUTOINCREMENT,user_id INTEGER,name TEXT NOT NULL,phone TEXT NOT NULL,service TEXT NOT NULL,details TEXT, status TEXT DEFAULT 'در انتظار بررسی',created_at TEXT DEFAULT CURRENT_TIMESTAMP);
-`);
-if(!db.prepare("SELECT 1 FROM users WHERE email=?").get("admin@didno.ir")){
-  db.prepare("INSERT INTO users(name,email,password,role) VALUES(?,?,?,?)").run("مدیر دیدنو","admin@didno.ir",bcrypt.hashSync("Admin12345!",10),"admin");
+function readDB(){
+  try { return JSON.parse(fs.readFileSync(DATA,"utf8")); }
+  catch(e){ return {products:[],users:[],orders:[]}; }
 }
-if(db.prepare("SELECT COUNT(*) c FROM services").get().c===0){
-  const ins=db.prepare("INSERT INTO services(title,description,price,icon) VALUES(?,?,?,?)");
-  [
-    ["طراحی گرافیک","طراحی پوستر، کارت ویزیت، بنر و محتوای تبلیغاتی","تماس بگیرید","🎨"],
-    ["چاپ و استیکر","چاپ استیکر، شبرنگ، روزرنگ و تبلیغات شیشه","تماس بگیرید","🖨️"],
-    ["فنرزنی کتاب","فنرزنی ساده، طلق‌دار و جلد پرس‌شده","از ۱۰۸٬۰۰۰ تومان","📚"],
-    ["تابلو و تبلیغات محیطی","طراحی و اجرای تبلیغات برای فروشگاه‌ها و کسب‌وکارها","استعلام قیمت","🏪"],
-    ["تولید محتوای تبلیغاتی","طراحی محتوای شبکه‌های اجتماعی و ویدئوی کوتاه","استعلام قیمت","🎬"],
-    ["سفارش اختصاصی","ایده‌پردازی و اجرای پروژه‌های خاص تبلیغاتی","توافقی","✨"]
-  ].forEach(x=>ins.run(...x));
+function writeDB(db){ fs.writeFileSync(DATA, JSON.stringify(db,null,2), "utf8"); }
+function id(prefix){ return prefix+"_"+crypto.randomBytes(6).toString("hex"); }
+function hash(p){ return crypto.createHash("sha256").update(p).digest("hex"); }
+function sign(payload){
+  const raw = Buffer.from(JSON.stringify(payload)).toString("base64url");
+  const sig = crypto.createHmac("sha256",SECRET).update(raw).digest("base64url");
+  return raw+"."+sig;
 }
-
-function auth(req,res,next){if(!req.session.user)return res.status(401).json({error:"ابتدا وارد حساب شوید"});next()}
-function admin(req,res,next){if(!req.session.user||req.session.user.role!=="admin")return res.status(403).json({error:"دسترسی مدیر لازم است"});next()}
-
-app.get("/api/services",(req,res)=>res.json(db.prepare("SELECT * FROM services ORDER BY id").all()));
-app.post("/api/register",(req,res)=>{
-  const {name,email,password}=req.body;
-  if(!name||!email||!password||password.length<6)return res.status(400).json({error:"نام، ایمیل و رمز حداقل ۶ کاراکتر الزامی است"});
+function verify(token){
   try{
-    const info=db.prepare("INSERT INTO users(name,email,password) VALUES(?,?,?)").run(name,email,bcrypt.hashSync(password,10));
-    req.session.user={id:info.lastInsertRowid,name,email,role:"user"};
-    res.json({user:req.session.user});
-  }catch(e){res.status(400).json({error:"این ایمیل قبلاً ثبت شده است"})}
+    const [raw,sig]=token.split(".");
+    const expected=crypto.createHmac("sha256",SECRET).update(raw).digest("base64url");
+    if(!sig || !crypto.timingSafeEqual(Buffer.from(sig),Buffer.from(expected))) return null;
+    const p=JSON.parse(Buffer.from(raw,"base64url").toString());
+    if(p.exp && p.exp<Date.now()) return null;
+    return p;
+  }catch(e){return null}
+}
+function setAuth(res,payload){
+  res.cookie("didno_auth", sign({...payload,exp:Date.now()+1000*60*60*24*7}), {
+    httpOnly:true, sameSite:"lax", secure:process.env.NODE_ENV==="production", maxAge:1000*60*60*24*7
+  });
+}
+function auth(req){
+  return verify(req.cookies.didno_auth || "");
+}
+function adminOnly(req,res,next){
+  const a=auth(req);
+  if(!a || a.role!=="admin") return res.status(401).json({error:"دسترسی مدیر مورد نیاز است"});
+  next();
+}
+
+app.get("/api/health",(req,res)=>res.json({ok:true,service:"didno",time:new Date().toISOString()}));
+app.get("/api/products",(req,res)=>res.json(readDB().products.filter(p=>p.active!==false)));
+app.get("/api/me",(req,res)=>res.json({user:auth(req)}));
+
+app.post("/api/register",(req,res)=>{
+  const {name,email,password}=req.body||{};
+  if(!name || !email || !password || password.length<6) return res.status(400).json({error:"نام، ایمیل و رمز عبور حداقل ۶ کاراکتری را وارد کنید."});
+  const db=readDB();
+  email=email.trim().toLowerCase();
+  if(db.users.some(u=>u.email===email)) return res.status(409).json({error:"این ایمیل قبلاً ثبت شده است."});
+  const user={id:id("u"),name:name.trim(),email,password:hash(password),createdAt:new Date().toISOString()};
+  db.users.push(user); writeDB(db);
+  setAuth(res,{id:user.id,name:user.name,email:user.email,role:"user"});
+  res.json({ok:true,user:{id:user.id,name:user.name,email:user.email,role:"user"}});
 });
+
 app.post("/api/login",(req,res)=>{
-  const u=db.prepare("SELECT * FROM users WHERE email=?").get(req.body.email);
-  if(!u||!bcrypt.compareSync(req.body.password,u.password))return res.status(401).json({error:"ایمیل یا رمز عبور اشتباه است"});
-  req.session.user={id:u.id,name:u.name,email:u.email,role:u.role};res.json({user:req.session.user});
+  const {email,password}=req.body||{};
+  const e=(email||"").trim().toLowerCase();
+  if(e===ADMIN_EMAIL && password===ADMIN_PASSWORD){
+    setAuth(res,{id:"admin",name:"مدیر دیدنو",email:ADMIN_EMAIL,role:"admin"});
+    return res.json({ok:true,role:"admin"});
+  }
+  const db=readDB();
+  const u=db.users.find(x=>x.email===e && x.password===hash(password||""));
+  if(!u) return res.status(401).json({error:"ایمیل یا رمز عبور اشتباه است."});
+  setAuth(res,{id:u.id,name:u.name,email:u.email,role:"user"});
+  res.json({ok:true,role:"user"});
 });
-app.post("/api/logout",(req,res)=>req.session.destroy(()=>res.json({ok:true})));
-app.get("/api/me",(req,res)=>res.json({user:req.session.user||null}));
-app.post("/api/orders",auth,(req,res)=>{
-  const {name,phone,service,details}=req.body;
-  if(!name||!phone||!service)return res.status(400).json({error:"نام، شماره و خدمت الزامی است"});
-  const x=db.prepare("INSERT INTO orders(user_id,name,phone,service,details) VALUES(?,?,?,?,?)").run(req.session.user.id,name,phone,service,details||"");
-  res.json({id:x.lastInsertRowid});
+app.post("/api/logout",(req,res)=>{res.clearCookie("didno_auth");res.json({ok:true});});
+
+app.post("/api/orders",(req,res)=>{
+  const a=auth(req);
+  const {items,customer,message}=req.body||{};
+  if(!Array.isArray(items)||!items.length) return res.status(400).json({error:"سبد خرید خالی است."});
+  const db=readDB();
+  const cleanItems=items.map(x=>({
+    productId:x.productId,name:x.name,qty:Math.max(1,Number(x.qty)||1),
+    unit:x.unit,price:Number(x.price)||0,contact:!!x.contact
+  }));
+  const order={id:id("ORD"),userId:a?.id||null,customer:customer||{},items:cleanItems,message:message||"",status:"در انتظار بررسی",createdAt:new Date().toISOString()};
+  db.orders.unshift(order); writeDB(db);
+  res.json({ok:true,orderId:order.id});
 });
-app.get("/api/orders",admin,(req,res)=>res.json(db.prepare("SELECT * FROM orders ORDER BY id DESC").all()));
-app.patch("/api/orders/:id",admin,(req,res)=>{
-  db.prepare("UPDATE orders SET status=? WHERE id=?").run(req.body.status,req.params.id);res.json({ok:true});
+
+app.get("/api/orders",adminOnly,(req,res)=>res.json(readDB().orders));
+app.patch("/api/orders/:id",adminOnly,(req,res)=>{
+  const db=readDB(), o=db.orders.find(x=>x.id===req.params.id);
+  if(!o) return res.status(404).json({error:"سفارش پیدا نشد."});
+  o.status=req.body.status||o.status; writeDB(db); res.json({ok:true,order:o});
 });
-app.post("/api/services",admin,(req,res)=>{
-  const {title,description,price,icon}=req.body;
-  db.prepare("INSERT INTO services(title,description,price,icon) VALUES(?,?,?,?)").run(title,description,price,icon||"✨");res.json({ok:true});
+
+app.get("/api/admin/stats",adminOnly,(req,res)=>{
+  const db=readDB();
+  res.json({
+    products:db.products.length,
+    activeProducts:db.products.filter(p=>p.active!==false).length,
+    users:db.users.length,
+    orders:db.orders.length,
+    pending:db.orders.filter(o=>o.status==="در انتظار بررسی").length
+  });
 });
-app.delete("/api/services/:id",admin,(req,res)=>{db.prepare("DELETE FROM services WHERE id=?").run(req.params.id);res.json({ok:true})});
-app.get("/api/stats",admin,(req,res)=>res.json({
-  users:db.prepare("SELECT COUNT(*) c FROM users WHERE role='user'").get().c,
-  orders:db.prepare("SELECT COUNT(*) c FROM orders").get().c,
-  pending:db.prepare("SELECT COUNT(*) c FROM orders WHERE status='در انتظار بررسی'").get().c,
-  services:db.prepare("SELECT COUNT(*) c FROM services").get().c
-}));
+app.get("/api/admin/products",adminOnly,(req,res)=>res.json(readDB().products));
+app.post("/api/admin/products",adminOnly,(req,res)=>{
+  const db=readDB(), b=req.body||{};
+  const p={id:id("p"),cat:b.cat||"سایر",icon:b.icon||"✦",name:(b.name||"محصول جدید").trim(),desc:b.desc||"",unit:b.unit||"استعلام",price:Number(b.price)||0,contact:!!b.contact,active:b.active!==false};
+  db.products.push(p); writeDB(db); res.json({ok:true,product:p});
+});
+app.put("/api/admin/products/:id",adminOnly,(req,res)=>{
+  const db=readDB(), p=db.products.find(x=>x.id===req.params.id);
+  if(!p) return res.status(404).json({error:"محصول پیدا نشد."});
+  Object.assign(p,{
+    cat:req.body.cat??p.cat,icon:req.body.icon??p.icon,name:req.body.name??p.name,
+    desc:req.body.desc??p.desc,unit:req.body.unit??p.unit,
+    price:Number(req.body.price)||0,contact:!!req.body.contact,active:req.body.active!==false
+  });
+  writeDB(db); res.json({ok:true,product:p});
+});
+app.delete("/api/admin/products/:id",adminOnly,(req,res)=>{
+  const db=readDB(); db.products=db.products.filter(x=>x.id!==req.params.id); writeDB(db); res.json({ok:true});
+});
+
 app.get("*",(req,res)=>res.sendFile(path.join(__dirname,"public","index.html")));
-app.listen(process.env.PORT||3000,()=>console.log("Didno running on http://localhost:3000"));
+app.listen(PORT,"0.0.0.0",()=>console.log(`Didno Pro running on port ${PORT}`));

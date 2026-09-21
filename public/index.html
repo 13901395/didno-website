@@ -1,22 +1,154 @@
-<!doctype html><html lang="fa" dir="rtl"><head>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>کانون تبلیغات دیدنو | طراحی، چاپ و تبلیغات</title>
-<meta name="description" content="کانون تبلیغات دیدنو؛ طراحی، چاپ، استیکر، فنرزنی کتاب و خدمات تبلیغاتی.">
-<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<!doctype html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>کانون تبلیغات دیدنو | ایده‌هات رو، با ما چاپ کن!</title>
+<meta name="description" content="سفارش آنلاین خدمات چاپ، تبلیغات، طراحی و صحافی کانون تبلیغات دیدنو">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/style.css"></head><body>
-<div class="top">⚡ سفارش آنلاین فعال است · پاسخ‌گویی سریع · کیفیت حرفه‌ای</div>
-<header><a class="logo" href="#">دیدنو<span>●</span></a><nav><a href="#home">خانه</a><a href="#services">خدمات</a><a href="#about">درباره ما</a><a href="#contact">تماس</a></nav><div class="actions"><button class="ghost" onclick="openAuth()">ورود / ثبت‌نام</button><button class="primary" onclick="openOrder()">ثبت سفارش</button></div></header>
+<style>
+:root{--bg:#071514;--bg2:#0b1e1b;--card:#0d2521;--card2:#102b27;--teal:#13c9b2;--mint:#35f0c9;--green:#b7ff1a;--text:#f4fffc;--muted:#9cb9b4;--line:rgba(132,255,226,.13);--danger:#ff6f7d;--shadow:0 22px 70px rgba(0,0,0,.32)}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:radial-gradient(circle at 80% -10%,rgba(19,201,178,.18),transparent 30%),radial-gradient(circle at 10% 30%,rgba(183,255,26,.08),transparent 28%),var(--bg);color:var(--text);font-family:Vazirmatn,Tahoma,sans-serif}button,input,textarea,select{font:inherit}button{cursor:pointer;border:0}.container{width:min(1180px,92%);margin:auto}.topbar{border-bottom:1px solid var(--line);background:rgba(4,13,12,.7);backdrop-filter:blur(18px);position:sticky;top:0;z-index:20}.nav{height:76px;display:flex;align-items:center;justify-content:space-between;gap:20px}.brand{font-size:25px;font-weight:900;display:flex;align-items:center;gap:10px}.brand i{width:11px;height:11px;background:var(--green);border-radius:50%;box-shadow:0 0 22px var(--green)}.links{display:flex;gap:26px;color:var(--muted);font-size:14px}.links a{color:inherit;text-decoration:none}.nav-actions{display:flex;gap:10px}.btn{padding:11px 17px;border-radius:13px;background:transparent;color:var(--text);border:1px solid var(--line);transition:.2s}.btn:hover{transform:translateY(-2px);border-color:rgba(53,240,201,.45)}.btn-primary{background:linear-gradient(135deg,var(--green),#6fdc34);color:#092016;border:0;font-weight:800;box-shadow:0 10px 28px rgba(183,255,26,.16)}.hero{padding:86px 0 55px}.hero-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:42px;align-items:center}.eyebrow{color:var(--mint);font-weight:800;font-size:13px;letter-spacing:.5px}.hero h1{font-size:clamp(38px,5vw,68px);line-height:1.12;margin:16px 0}.hero h1 span{color:var(--green)}.hero p{color:var(--muted);line-height:2;font-size:17px;max-width:680px}.hero-actions{display:flex;gap:12px;margin-top:28px;flex-wrap:wrap}.hero-card{min-height:330px;border:1px solid var(--line);border-radius:30px;background:linear-gradient(145deg,rgba(19,201,178,.14),rgba(183,255,26,.05));box-shadow:var(--shadow);padding:26px;position:relative;overflow:hidden}.hero-card:before{content:"";position:absolute;width:250px;height:250px;border-radius:50%;background:var(--teal);filter:blur(90px);opacity:.18;right:-80px;top:-90px}.mock{position:absolute;inset:25px;border-radius:22px;border:1px solid var(--line);background:rgba(2,12,11,.6);padding:22px}.mock-title{font-size:20px;font-weight:800}.mock-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-top:22px}.mock-box{padding:18px;border-radius:18px;background:var(--card);border:1px solid var(--line)}.mock-box b{display:block;font-size:23px;color:var(--green)}section{padding:68px 0}.section-head{display:flex;justify-content:space-between;gap:20px;align-items:end;margin-bottom:28px}.section-head h2{font-size:32px;margin:8px 0}.section-head p{color:var(--muted);margin:0}.categories{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:25px}.chip{padding:10px 16px;border-radius:999px;border:1px solid var(--line);background:rgba(13,37,33,.65);color:var(--muted)}.chip.active{background:var(--green);color:#092016;border-color:transparent;font-weight:800}.products{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}.product{background:linear-gradient(180deg,var(--card2),var(--card));border:1px solid var(--line);border-radius:22px;padding:19px;min-height:245px;display:flex;flex-direction:column;transition:.22s}.product:hover{transform:translateY(-5px);border-color:rgba(53,240,201,.32);box-shadow:0 18px 40px rgba(0,0,0,.2)}.picon{width:48px;height:48px;border-radius:15px;background:rgba(19,201,178,.11);display:grid;place-items:center;color:var(--mint);font-size:24px}.product h3{margin:15px 0 7px}.product p{font-size:13px;line-height:1.8;color:var(--muted);min-height:46px}.price-row{margin-top:auto;display:flex;align-items:end;justify-content:space-between;gap:10px}.price small{display:block;color:var(--muted);font-size:11px}.price b{color:var(--green);font-size:17px}.add{background:var(--teal);color:#05201c;border-radius:12px;padding:10px 12px;font-weight:800}.contact-btn{background:rgba(183,255,26,.11);color:var(--green);border:1px solid rgba(183,255,26,.18)}.features{display:grid;grid-template-columns:repeat(3,1fr);gap:15px}.feature{padding:25px;border-radius:22px;border:1px solid var(--line);background:rgba(13,37,33,.62)}.feature strong{font-size:18px}.feature p{color:var(--muted);line-height:1.9;font-size:13px}.cta{border-radius:30px;padding:35px;background:linear-gradient(120deg,rgba(19,201,178,.18),rgba(183,255,26,.09));border:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;gap:20px}.footer{border-top:1px solid var(--line);padding:35px 0;color:var(--muted)}.footer-grid{display:flex;justify-content:space-between;gap:25px}.drawer,.modal{position:fixed;inset:0;background:rgba(0,0,0,.65);backdrop-filter:blur(8px);z-index:50;display:none}.drawer.open,.modal.open{display:block}.drawer-panel{position:absolute;top:0;left:0;width:min(470px,94%);height:100%;background:#071714;border-right:1px solid var(--line);padding:24px;overflow:auto}.modal-card{width:min(520px,92%);margin:8vh auto;background:#0a1b18;border:1px solid var(--line);border-radius:24px;padding:24px;max-height:84vh;overflow:auto}.modal-card h2{margin-top:0}.field{margin:11px 0}.field label{display:block;color:var(--muted);font-size:12px;margin-bottom:7px}.field input,.field textarea,.field select{width:100%;padding:12px 13px;border-radius:12px;border:1px solid var(--line);background:#06110f;color:var(--text);outline:none}.field textarea{min-height:90px;resize:vertical}.cart-item{padding:14px 0;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;gap:12px}.qty{display:flex;align-items:center;gap:8px}.qty button{width:28px;height:28px;border-radius:8px;background:var(--card2);color:var(--text)}.cart-total{padding:20px 0;font-size:20px;display:flex;justify-content:space-between}.empty{padding:45px 10px;text-align:center;color:var(--muted)}.toast{position:fixed;bottom:22px;right:22px;z-index:100;background:#0c2621;border:1px solid var(--line);padding:13px 18px;border-radius:13px;display:none}.toast.show{display:block}.admin{padding:40px 0}.admin-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}.stat{padding:20px;border:1px solid var(--line);background:var(--card);border-radius:18px}.stat b{font-size:28px;color:var(--green);display:block}.table-wrap{overflow:auto;border:1px solid var(--line);border-radius:18px;margin-top:22px}.table{width:100%;border-collapse:collapse;min-width:750px}.table th,.table td{padding:13px;border-bottom:1px solid var(--line);text-align:right}.table th{color:var(--muted);font-size:12px}.small-btn{padding:7px 10px;border-radius:9px;background:var(--card2);color:var(--text);border:1px solid var(--line)}.danger{color:#ff9ba5}.hide{display:none!important}@media(max-width:900px){.hero-grid{grid-template-columns:1fr}.products{grid-template-columns:repeat(2,1fr)}.features{grid-template-columns:1fr}.links{display:none}.admin-grid{grid-template-columns:repeat(2,1fr)}}@media(max-width:560px){.products{grid-template-columns:1fr}.hero{padding-top:55px}.hero h1{font-size:40px}.nav-actions .btn:not(.btn-primary){display:none}.cta,.footer-grid{flex-direction:column;align-items:flex-start}.admin-grid{grid-template-columns:1fr}.section-head{display:block}}
+
+/* DIDNO animated hero */
+.brand{gap:10px}
+.brand img{width:72px;height:54px;object-fit:contain;border-radius:10px;filter:drop-shadow(0 0 12px rgba(19,201,178,.25))}
+.brand span{display:none}
+.hero-pro{padding:28px 0 70px}
+.hero-pro .container{width:min(1380px,96%)}
+.hero-visual{height:min(610px,58vw);min-height:410px;border-radius:32px;overflow:hidden;position:relative;border:1px solid rgba(53,240,201,.22);box-shadow:0 30px 90px rgba(0,0,0,.45);background:#03100f}
+.hero-bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;animation:heroZoom 14s ease-in-out infinite alternate}
+.hero-glow{position:absolute;inset:-15%;background:radial-gradient(circle at 50% 50%,rgba(19,201,178,.16),transparent 34%),linear-gradient(180deg,transparent 55%,rgba(3,12,11,.35));pointer-events:none}
+.orbit{position:absolute;border:1px solid rgba(53,240,201,.42);border-radius:50%;pointer-events:none}
+.orbit-one{width:52%;height:52%;left:24%;top:23%;animation:spin 18s linear infinite}
+.orbit-two{width:66%;height:35%;left:17%;top:33%;transform:rotate(-18deg);animation:spinReverse 23s linear infinite}
+.message-bubble{position:absolute;min-width:155px;padding:13px 18px;border-radius:20px;background:rgba(3,21,18,.78);border:1px solid rgba(53,240,201,.58);box-shadow:0 12px 30px rgba(0,0,0,.3),0 0 22px rgba(19,201,178,.1);backdrop-filter:blur(12px);animation:floatBubble 4.5s ease-in-out infinite;z-index:3}
+.message-bubble:after{content:"";position:absolute;width:7px;height:7px;background:var(--mint);border-radius:50%;box-shadow:0 0 13px var(--mint);top:12px;right:12px}
+.message-bubble b{display:block;color:#fff;font-size:14px;padding-right:12px}
+.message-bubble small{display:block;color:#a9d6cf;font-size:11px;margin-top:5px;padding-right:12px}
+.bubble-1{top:17%;left:12%;animation-delay:-.4s}.bubble-2{top:15%;right:13%;animation-delay:-1.2s}
+.bubble-3{top:39%;left:7%;animation-delay:-2.1s}.bubble-4{top:39%;right:7%;animation-delay:-.8s}
+.bubble-5{bottom:18%;left:13%;animation-delay:-2.8s}.bubble-6{bottom:17%;right:12%;animation-delay:-1.7s}
+.hero-copy{position:relative;text-align:center;margin:-105px auto 0;max-width:800px;z-index:5;padding:0 20px}
+.hero-copy .eyebrow{display:inline-block;background:rgba(4,25,21,.8);padding:8px 15px;border:1px solid var(--line);border-radius:999px;backdrop-filter:blur(10px)}
+.hero-copy h1{font-size:clamp(34px,5vw,58px);margin:15px 0 8px;text-shadow:0 5px 30px rgba(0,0,0,.8)}
+.hero-copy h1 span{color:var(--mint)}
+.hero-copy p{max-width:720px;margin:0 auto;color:#c4dad6;line-height:1.9;text-shadow:0 3px 15px #000}
+.hero-copy .hero-actions{justify-content:center}
+@keyframes heroZoom{from{transform:scale(1)}to{transform:scale(1.045)}}
+@keyframes floatBubble{0%,100%{transform:translateY(0) rotate(0deg)}50%{transform:translateY(-10px) rotate(.5deg)}}
+@keyframes spin{to{transform:rotate(360deg)}}
+@keyframes spinReverse{to{transform:rotate(-378deg)}}
+@media(max-width:900px){
+ .hero-visual{height:520px;min-height:0}.message-bubble{min-width:125px;padding:9px 12px}.message-bubble b{font-size:11px}.message-bubble small{font-size:9px}
+ .bubble-1{left:3%;top:12%}.bubble-2{right:3%;top:12%}.bubble-3{left:2%;top:36%}.bubble-4{right:2%;top:36%}.bubble-5{left:4%;bottom:13%}.bubble-6{right:4%;bottom:13%}
+ .hero-copy{margin:-85px auto 0}.brand img{width:65px;height:48px}
+}
+@media(max-width:560px){
+ .hero-pro{padding-top:16px}.hero-visual{height:430px;border-radius:24px}.hero-bg{object-position:center top}
+ .message-bubble{min-width:105px;padding:7px 9px;border-radius:14px}.message-bubble b{font-size:9px}.message-bubble small{font-size:7px}.message-bubble:after{width:5px;height:5px;top:8px;right:8px}
+ .hero-copy{margin:-65px auto 0}.hero-copy p{font-size:12px}.hero-copy h1{font-size:32px}.hero-copy .hero-actions .btn{font-size:12px;padding:10px 12px}
+ .bubble-3,.bubble-4{top:42%}.bubble-5,.bubble-6{bottom:9%}
+}
+</style>
+</head>
+<body>
+<header class="topbar"><div class="container nav">
+  <div class="brand"><img src="/didno-logo.png" alt="کانون تبلیغات دیدنو"><span>دیدنو</span></div>
+  <nav class="links"><a href="#services">خدمات</a><a href="#why">چرا دیدنو؟</a><a href="#contact">تماس</a></nav>
+  <div class="nav-actions"><button class="btn" onclick="openAuth()">ورود / ثبت‌نام</button><button class="btn btn-primary" onclick="openCart()">سبد سفارش <span id="cartCount">۰</span></button></div>
+</div></header>
+
 <main>
-<section id="home" class="hero"><div><div class="pill">کانون تبلیغات دیدنو</div><h1>تبلیغی که<br><span>دیده می‌شود.</span></h1><p>از طراحی و چاپ تا استیکر، تبلیغات فروشگاهی و فنرزنی کتاب؛ ایده را به یک خروجی حرفه‌ای تبدیل می‌کنیم.</p><div class="heroBtns"><button class="primary big" onclick="openOrder()">شروع سفارش ↗</button><a class="outline big" href="#services">مشاهده خدمات</a></div><div class="trust"><b>+۶</b><small>دسته خدمات</small><b>۲۴/۷</b><small>ثبت سفارش آنلاین</small></div></div><div class="visual"><div class="orb"></div><div class="card c1">🎨<b>طراحی</b><small>خلاقانه و دقیق</small></div><div class="card c2">🖨️<b>چاپ</b><small>آماده اجرا</small></div><div class="card c3">✨<b>ایده</b><small>متفاوت و جذاب</small></div></div></section>
-<section id="services"><div class="sectionHead"><div><div class="eyebrow">SERVICES</div><h2>هر چیزی برای تبلیغاتت</h2></div><p>خدمات را انتخاب کن، جزئیات را بفرست و سفارش را آنلاین ثبت کن.</p></div><div id="serviceGrid" class="grid"></div></section>
-<section id="about" class="about"><div><div class="eyebrow">WHY DIDNO</div><h2>فقط یک چاپخانه نیستیم.</h2><p>دیدنو روی سه چیز تمرکز دارد: طراحی قابل‌فهم، اجرای تمیز و تجربه سفارش ساده. این سایت هم برای همین ساخته شده تا مشتری از انتخاب خدمت تا پیگیری سفارش مسیر مشخصی داشته باشد.</p></div><div class="features"><div>🚀<b>سریع</b><span>ثبت سفارش بدون رفت‌وآمد</span></div><div>🧠<b>خلاق</b><span>ایده متناسب با کسب‌وکار</span></div><div>📦<b>منظم</b><span>پیگیری وضعیت سفارش</span></div><div>🔒<b>حساب کاربری</b><span>مدیریت سفارش‌های شما</span></div></div></section>
-<section id="contact" class="contact"><div><div class="eyebrow">CONTACT</div><h2>آماده‌ای دیده بشی؟</h2><p>برای ثبت سفارش یا مشاوره، از فرم سفارش استفاده کن.</p></div><button class="primary big" onclick="openOrder()">ثبت سفارش آنلاین</button></section>
-</main><footer><b>کانون تبلیغات دیدنو</b><span>بلوار مالک اشتر، کوچه نوفلوشاتو</span><span>© 2026 Didno</span><button onclick="openAuth()">حساب کاربری</button></footer>
+<section class="hero hero-pro">
+  <div class="container">
+    <div class="hero-visual">
+      <img class="hero-bg" src="/didno-hero.png" alt="کانون تبلیغات دیدنو">
+      <div class="hero-glow"></div>
+      <div class="orbit orbit-one"></div>
+      <div class="orbit orbit-two"></div>
 
-<div id="auth" class="modal"><div class="modalBox"><button class="x" onclick="closeModal('auth')">×</button><div class="tabs"><button id="loginTab" class="active" onclick="showLogin()">ورود</button><button id="regTab" onclick="showRegister()">ثبت‌نام</button></div><form id="loginForm"><h2>خوش برگشتی 👋</h2><input id="lemail" type="email" placeholder="ایمیل" required><input id="lpass" type="password" placeholder="رمز عبور" required><button class="primary full">ورود به حساب</button></form><form id="regForm" class="hidden"><h2>ساخت حساب ✨</h2><input id="rname" placeholder="نام و نام خانوادگی" required><input id="remail" type="email" placeholder="ایمیل" required><input id="rpass" type="password" placeholder="رمز عبور (حداقل ۶ کاراکتر)" required><button class="primary full">ساخت حساب</button></form><p id="authMsg" class="msg"></p></div></div>
+      <div class="message-bubble bubble-1"><b>طراحی اختصاصی</b><small>از ایده تا اجرا</small></div>
+      <div class="message-bubble bubble-2"><b>قیمت مناسب</b><small>با بهترین کیفیت</small></div>
+      <div class="message-bubble bubble-3"><b>چاپ باکیفیت بالا</b><small>رنگ‌های زنده و ماندگار</small></div>
+      <div class="message-bubble bubble-4"><b>پشتیبانی کامل</b><small>از سفارش تا تحویل</small></div>
+      <div class="message-bubble bubble-5"><b>تحویل به‌موقع</b><small>با تضمین کیفیت</small></div>
+      <div class="message-bubble bubble-6"><b>مشاوره رایگان</b><small>قبل از سفارش</small></div>
+    </div>
 
-<div id="order" class="modal"><div class="modalBox"><button class="x" onclick="closeModal('order')">×</button><h2>ثبت سفارش 🛒</h2><form id="orderForm"><input id="oname" placeholder="نام و نام خانوادگی" required><input id="ophone" placeholder="شماره تماس" required><select id="oservice" required></select><textarea id="odetails" placeholder="توضیحات سفارش، ابعاد، تعداد و..."></textarea><button class="primary full">ثبت سفارش</button></form><p id="orderMsg" class="msg"></p></div></div>
+    <div class="hero-copy">
+      <div class="eyebrow">DIDNO ADVERTISING CENTER</div>
+      <h1>ایده‌هات رو، <span>با ما چاپ کن!</span></h1>
+      <p>از طراحی و چاپ تا تبلیغات محیطی، تابلو، استیکر، صحافی و خدمات اختصاصی؛ همه‌چیز را ساده و آنلاین سفارش بده.</p>
+      <div class="hero-actions">
+        <button class="btn btn-primary" onclick="document.querySelector('#services').scrollIntoView()">مشاهده خدمات و ثبت سفارش 🛒</button>
+        <button class="btn" onclick="contactOrder()">تماس با ما ☎</button>
+      </div>
+    </div>
+  </div>
+</section>
 
-<div id="admin" class="modal"><div class="modalBox adminBox"><button class="x" onclick="closeModal('admin')">×</button><h2>پنل مدیریت دیدنو ⚙️</h2><div id="stats" class="stats"></div><h3>سفارش‌ها</h3><div id="orders"></div><h3>افزودن خدمت</h3><form id="serviceForm" class="adminForm"><input id="stitle" placeholder="عنوان"><input id="sdesc" placeholder="توضیح"><input id="sprice" placeholder="قیمت"><input id="sicon" placeholder="ایموجی"><button class="primary">افزودن</button></form><div id="adminMsg" class="msg"></div></div></div>
-<script src="/app.js"></script></body></html>
+<section id="services"><div class="container">
+  <div class="section-head"><div><div class="eyebrow">SERVICES</div><h2>هر چیزی که برای چاپ و تبلیغات لازم داری</h2></div><p>قیمت‌ها نمونه‌اند و مدیر مجموعه می‌تواند از پنل تغییرشان دهد.</p></div>
+  <div class="categories" id="cats"></div>
+  <div class="products" id="products"></div>
+</div></section>
+
+<section id="why"><div class="container">
+  <div class="section-head"><div><div class="eyebrow">WHY DIDNO</div><h2>سفارش راحت، شفاف و سریع</h2></div></div>
+  <div class="features">
+    <div class="feature"><strong>🛒 سفارش مرحله‌ای</strong><p>محصولات مختلف را به سبد اضافه کن و یک‌جا درخواستت را ثبت کن.</p></div>
+    <div class="feature"><strong>💬 استعلام برای کارهای خاص</strong><p>برای تابلو، کاتالوگ، طراحی و پروژه‌های اختصاصی مستقیماً درخواست تماس ثبت می‌شود.</p></div>
+    <div class="feature"><strong>⚡ پنل مدیریت</strong><p>مدیر می‌تواند قیمت، عنوان، دسته‌بندی و وضعیت فعال بودن خدمات را مدیریت کند.</p></div>
+  </div>
+</div></section>
+
+<section id="contact"><div class="container"><div class="cta"><div><div class="eyebrow">DIDNO ADVERTISING</div><h2>پروژه خاص داری؟</h2><p style="color:var(--muted)">ابعاد، تعداد یا خدمات موردنظرت را بگو تا برایت بررسی شود.</p></div><button class="btn btn-primary" onclick="contactOrder()">درخواست مشاوره و استعلام</button></div></div></section>
+</main>
+
+<footer class="footer"><div class="container footer-grid"><div><b style="color:var(--text)">کانون تبلیغات دیدنو</b><div>چاپ • طراحی • تبلیغات • صحافی</div></div><div>بلوار مالک اشتر، کوچه نوفلوشاتو</div></div></footer>
+
+<div class="drawer" id="cartDrawer"><div class="drawer-panel"><div style="display:flex;justify-content:space-between;align-items:center"><h2>سبد سفارش</h2><button class="btn" onclick="closeCart()">بستن</button></div><div id="cartItems"></div><div class="cart-total"><span>جمع تقریبی</span><b id="cartTotal">۰ تومان</b></div><button class="btn btn-primary" style="width:100%" onclick="checkout()">ثبت سفارش</button></div></div>
+
+<div class="modal" id="authModal"><div class="modal-card"><button class="btn" style="float:left" onclick="closeAuth()">×</button><div style="display:flex;gap:6px;margin-bottom:20px"><button class="chip active" id="tabLogin" onclick="authTab('login')">ورود</button><button class="chip" id="tabRegister" onclick="authTab('register')">ثبت‌نام</button></div><div id="authBox"></div></div></div>
+
+<div class="modal" id="checkoutModal"><div class="modal-card"><button class="btn" style="float:left" onclick="closeCheckout()">×</button><h2>ثبت سفارش</h2><p style="color:var(--muted);font-size:13px">اطلاعات تماس را وارد کن؛ سفارش برای بررسی ارسال می‌شود.</p><div class="field"><label>نام و نام خانوادگی</label><input id="cName"></div><div class="field"><label>شماره تماس</label><input id="cPhone" placeholder="09xxxxxxxxx"></div><div class="field"><label>توضیحات</label><textarea id="cMessage" placeholder="ابعاد، رنگ، تعداد یا توضیحات تکمیلی..."></textarea></div><button class="btn btn-primary" style="width:100%" onclick="sendOrder()">ارسال سفارش</button></div></div>
+
+<div class="modal" id="adminModal"><div class="modal-card" style="width:min(1100px,95%)"><button class="btn" style="float:left" onclick="closeAdmin()">×</button><h2>پنل مدیریت دیدنو</h2><div id="adminContent"></div></div></div>
+<div class="toast" id="toast"></div>
+
+<script>
+let products=[],cart=JSON.parse(localStorage.didnoCart||"[]"),category="همه";
+const money=n=>n?new Intl.NumberFormat("fa-IR").format(n)+" تومان":"تماس بگیرید";
+const esc=s=>String(s??"").replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[m]));
+async function api(url,opt={}){const r=await fetch(url,{headers:{"Content-Type":"application/json"},...opt});let d={};try{d=await r.json()}catch{}if(!r.ok)throw Error(d.error||"خطا در ارتباط با سرور");return d}
+function toast(s){const t=document.getElementById("toast");t.textContent=s;t.classList.add("show");setTimeout(()=>t.classList.remove("show"),2800)}
+async function load(){try{products=await api("/api/products");renderCats();renderProducts()}catch(e){toast("ارتباط با سرور برقرار نشد")}}
+function renderCats(){let cats=["همه",...new Set(products.map(p=>p.cat))];document.getElementById("cats").innerHTML=cats.map(c=>`<button class="chip ${c===category?"active":""}" onclick="category='${esc(c)}';renderCats();renderProducts()">${esc(c)}</button>`).join("")}
+function renderProducts(){let ps=category==="همه"?products:products.filter(p=>p.cat===category);document.getElementById("products").innerHTML=ps.map(p=>`<article class="product"><div class="picon">${esc(p.icon)}</div><h3>${esc(p.name)}</h3><p>${esc(p.desc)}</p><div class="price-row"><div class="price"><small>${esc(p.unit)}</small><b>${p.contact?"تماس بگیرید":money(p.price)}</b></div><button class="add ${p.contact?"contact-btn":""}" onclick="add('${p.id}')">${p.contact?"استعلام":"افزودن"}</button></div></article>`).join("")}
+function add(pid){const p=products.find(x=>x.id===pid);let x=cart.find(x=>x.productId===pid);if(x)x.qty++;else cart.push({productId:p.id,name:p.name,unit:p.unit,price:p.price,contact:p.contact,qty:1});saveCart();toast(p.contact?"به سبد استعلام اضافه شد":"به سبد سفارش اضافه شد")}
+function saveCart(){localStorage.didnoCart=JSON.stringify(cart);document.getElementById("cartCount").textContent=new Intl.NumberFormat("fa-IR").format(cart.reduce((a,x)=>a+x.qty,0));renderCart()}
+function renderCart(){const el=document.getElementById("cartItems");if(!cart.length){el.innerHTML='<div class="empty">هنوز چیزی به سبد اضافه نکرده‌ای.</div>';document.getElementById("cartTotal").textContent="۰ تومان";return}el.innerHTML=cart.map((x,i)=>`<div class="cart-item"><div><b>${esc(x.name)}</b><div style="color:var(--muted);font-size:12px">${x.contact?"استعلام قیمت":"هر واحد "+money(x.price)}</div></div><div class="qty"><button onclick="chg(${i},-1)">−</button><span>${x.qty}</span><button onclick="chg(${i},1)">+</button></div></div>`).join("");let total=cart.reduce((a,x)=>a+(x.contact?0:x.price*x.qty),0);document.getElementById("cartTotal").textContent=total?money(total):"استعلام قیمت"}
+function chg(i,n){cart[i].qty+=n;if(cart[i].qty<=0)cart.splice(i,1);saveCart()}
+function openCart(){renderCart();document.getElementById("cartDrawer").classList.add("open")}function closeCart(){document.getElementById("cartDrawer").classList.remove("open")}
+function openAuth(){authTab("login");document.getElementById("authModal").classList.add("open")}function closeAuth(){document.getElementById("authModal").classList.remove("open")}
+function authTab(tab){document.getElementById("tabLogin").classList.toggle("active",tab==="login");document.getElementById("tabRegister").classList.toggle("active",tab==="register");document.getElementById("authBox").innerHTML=tab==="login"?`<h2>ورود به حساب</h2><div class="field"><label>ایمیل</label><input id="aEmail" type="email"></div><div class="field"><label>رمز عبور</label><input id="aPass" type="password"></div><button class="btn btn-primary" style="width:100%" onclick="login()">ورود</button>`:`<h2>ساخت حساب</h2><div class="field"><label>نام و نام خانوادگی</label><input id="rName"></div><div class="field"><label>ایمیل</label><input id="rEmail" type="email"></div><div class="field"><label>رمز عبور</label><input id="rPass" type="password"></div><button class="btn btn-primary" style="width:100%" onclick="register()">ساخت حساب</button>`}
+async function login(){try{let d=await api("/api/login",{method:"POST",body:JSON.stringify({email:aEmail.value,password:aPass.value})});closeAuth();toast("ورود موفق بود");if(d.role==="admin")openAdmin()}catch(e){toast(e.message)}}
+async function register(){try{await api("/api/register",{method:"POST",body:JSON.stringify({name:rName.value,email:rEmail.value,password:rPass.value})});closeAuth();toast("حساب با موفقیت ساخته شد")}catch(e){toast(e.message)}}
+function checkout(){if(!cart.length)return toast("سبد سفارش خالی است");closeCart();document.getElementById("checkoutModal").classList.add("open")}
+function closeCheckout(){document.getElementById("checkoutModal").classList.remove("open")}
+async function sendOrder(){try{let d=await api("/api/orders",{method:"POST",body:JSON.stringify({items:cart,customer:{name:cName.value,phone:cPhone.value},message:cMessage.value})});cart=[];saveCart();closeCheckout();toast("سفارش شما با کد "+d.orderId+" ثبت شد")}catch(e){toast(e.message)}}
+function contactOrder(){cart=[];let p=products.find(x=>x.id==="design");if(p)cart.push({productId:p.id,name:"مشاوره و استعلام پروژه",unit:"استعلام",price:0,contact:true,qty:1});saveCart();checkout()}
+async function openAdmin(){document.getElementById("adminModal").classList.add("open");document.getElementById("adminContent").innerHTML="در حال بارگذاری...";try{let [s,ps,os]=await Promise.all([api("/api/admin/stats"),api("/api/admin/products"),api("/api/orders")]);document.getElementById("adminContent").innerHTML=`<div class="admin-grid"><div class="stat"><small>محصولات</small><b>${s.products}</b></div><div class="stat"><small>خدمات فعال</small><b>${s.activeProducts}</b></div><div class="stat"><small>کاربران</small><b>${s.users}</b></div><div class="stat"><small>سفارش‌های در انتظار</small><b>${s.pending}</b></div></div><div style="margin-top:28px;display:flex;gap:10px"><button class="btn btn-primary" onclick="newProduct()">+ محصول جدید</button><button class="btn" onclick="openAdmin()">به‌روزرسانی</button></div><div class="table-wrap"><table class="table"><thead><tr><th>محصول</th><th>دسته</th><th>قیمت</th><th>وضعیت</th><th>عملیات</th></tr></thead><tbody>${ps.map(p=>`<tr><td>${esc(p.name)}</td><td>${esc(p.cat)}</td><td>${p.contact?"تماس":money(p.price)}</td><td>${p.active===false?"غیرفعال":"فعال"}</td><td><button class="small-btn" onclick='editProduct(${JSON.stringify(p)})'>ویرایش</button> <button class="small-btn danger" onclick="deleteProduct('${p.id}')">حذف</button></td></tr>`).join("")}</tbody></table></div><h3 style="margin-top:30px">سفارش‌های اخیر</h3><div class="table-wrap"><table class="table"><thead><tr><th>کد</th><th>مشتری</th><th>مبلغ</th><th>وضعیت</th></tr></thead><tbody>${os.slice(0,30).map(o=>`<tr><td>${o.id}</td><td>${esc(o.customer?.name||"—")}<br><small>${esc(o.customer?.phone||"")}</small></td><td>${money(o.items.reduce((a,x)=>a+(x.contact?0:x.price*x.qty),0))}</td><td><select onchange="status('${o.id}',this.value)"><option ${o.status==="در انتظار بررسی"?"selected":""}>در انتظار بررسی</option><option ${o.status==="در حال انجام"?"selected":""}>در حال انجام</option><option ${o.status==="آماده تحویل"?"selected":""}>آماده تحویل</option><option ${o.status==="تحویل شد"?"selected":""}>تحویل شد</option></select></td></tr>`).join("")}</tbody></table></div>`}catch(e){document.getElementById("adminContent").innerHTML=`<p>${esc(e.message)}</p>`}}
+function closeAdmin(){document.getElementById("adminModal").classList.remove("open")}
+function editProduct(p){productForm(p)}
+function newProduct(){productForm({name:"",cat:"چاپ",icon:"✦",desc:"",unit:"هر عدد",price:0,contact:false,active:true})}
+function productForm(p){document.getElementById("adminContent").innerHTML=`<button class="btn" onclick="openAdmin()">← بازگشت</button><h3>ویرایش محصول</h3><div class="field"><label>نام</label><input id="fName" value="${esc(p.name)}"></div><div class="field"><label>دسته‌بندی</label><input id="fCat" value="${esc(p.cat)}"></div><div class="field"><label>آیکون</label><input id="fIcon" value="${esc(p.icon)}"></div><div class="field"><label>توضیحات</label><textarea id="fDesc">${esc(p.desc)}</textarea></div><div class="field"><label>واحد</label><input id="fUnit" value="${esc(p.unit)}"></div><div class="field"><label>قیمت تومان؛ اگر تماس است صفر</label><input id="fPrice" type="number" value="${p.price||0}"></div><div class="field"><label><input id="fContact" type="checkbox" ${p.contact?"checked":""}> قیمت فقط با تماس</label></div><div class="field"><label><input id="fActive" type="checkbox" ${p.active!==false?"checked":""}> فعال باشد</label></div><button class="btn btn-primary" onclick="saveProduct('${p.id||""}')">ذخیره</button>`}
+async function saveProduct(pid){let body={name:fName.value,cat:fCat.value,icon:fIcon.value,desc:fDesc.value,unit:fUnit.value,price:Number(fPrice.value)||0,contact:fContact.checked,active:fActive.checked};try{if(pid)await api("/api/admin/products/"+pid,{method:"PUT",body:JSON.stringify(body)});else await api("/api/admin/products",{method:"POST",body:JSON.stringify(body)});toast("ذخیره شد");openAdmin()}catch(e){toast(e.message)}}
+async function deleteProduct(pid){if(!confirm("این محصول حذف شود؟"))return;try{await api("/api/admin/products/"+pid,{method:"DELETE"});toast("حذف شد");openAdmin()}catch(e){toast(e.message)}}
+async function status(id,v){try{await api("/api/orders/"+id,{method:"PATCH",body:JSON.stringify({status:v})});toast("وضعیت سفارش تغییر کرد")}catch(e){toast(e.message)}}
+saveCart();load();
+</script>
+</body></html>

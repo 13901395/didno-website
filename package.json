@@ -1,7 +1,17 @@
 {
-  "name":"didno-advertising-site",
-  "version":"1.0.0",
-  "private":true,
-  "scripts":{"start":"node server.js","dev":"node server.js"},
-  "dependencies":{"express":"^4.21.2","express-session":"^1.18.1","better-sqlite3":"^11.7.0","bcryptjs":"^2.4.3"}
+  "name": "didno-pro-site",
+  "version": "2.0.0",
+  "private": true,
+  "description": "وب‌سایت فروش و سفارش آنلاین کانون تبلیغات دیدنو",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "dependencies": {
+    "express": "^4.21.2",
+    "cookie-parser": "^1.4.7"
+  }
 }
